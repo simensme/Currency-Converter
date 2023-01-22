@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+}
+* body {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+* body #main {
+  background-color: lightblue;
+  display: inline-block;
+}
+* body #main #title,
+* body #main form,
+* body #main #buttonField,
+* body #main #resultField {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+* body #main .inputField {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+* body #main label {
+  width: 100px;
+}
+* body #main select {
+  width: 150px;
+}/*# sourceMappingURL=styles.css.map */

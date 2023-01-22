@@ -23,13 +23,10 @@ const requestOptions = {
     }
 };
 
-
 // Access-link for frontend
-
 const accessLink = '/convert/:from/:to/:amount';
 
 // API Interaction
-
 app.get(accessLink, async (req, res) => {
     // params
     const fromCurrency = req.params.from;
@@ -42,8 +39,6 @@ app.get(accessLink, async (req, res) => {
         res.status(400).sendStatus('There has been an error on the backend');
     } else {
         res.send(json);
-       // const convertedAmount = JSON.stringify(json.result);
-       // res.send(`You have converted ${fromCurrency.toUpperCase()} ${amount},- to ${toCurrency.toUpperCase()} ${convertedAmount},-`);
     }
 });
 

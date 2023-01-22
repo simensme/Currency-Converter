@@ -1,10 +1,7 @@
-// Frontend part of application
-
-
-// AccessLink
+// AccessLink to the server
 const accessLink = 'http://localhost:3000/convert/';
 
-// Main app - fetching from server
+// Fetch from server
 const main = async (fromCurrency, toCurrency, amount) => {
     const response = await fetch(`${accessLink}${fromCurrency}/${toCurrency}/${amount}`);
     const json = await response.json();
@@ -12,46 +9,56 @@ const main = async (fromCurrency, toCurrency, amount) => {
         console.log('There has been an error on the frontend');
     } else {
         const convertedAmount = JSON.stringify(json.result);
-        //console.log(convertedAmount)
         return convertedAmount;
-        // console.log(`You have converted ${fromCurrency.toUpperCase()} ${amount},- to ${toCurrency.toUpperCase()} ${convertedAmount},-`)
     }
 };
 
-/*
-main('AUD', 'NOK', 1000);
-*/
-
-
-// Main Application
-
-
-const mainNode = document.getElementById('main');
-
+// Application
 const renderHome = () => {
+    // Available currencies
     const currencyOptions = `
-    <option value="usd">USD</option>
-        <option value="eur">EUR</option>
-        <option value="nok">NOK</option>
-        <option value="aud">AUD</option>
-        <option value="gbp">GBP</option>
-        <option value="cad">CAD</option>
-        <option value="pln">PLN</option>
-        <option value="sek">SEK</option>
-        <option value="dkk">DKK</option>
-        <option value="jpy">JPY</option>
-        <option value="cny">CNY</option>
-        <option value="chf">CHF</option>
-        <option value="hkd">HKD</option>
-        <option value="sgd">SGD</option>
-        <option value="krw">KRW</option>
-        <option value="nzd">NZD</option>
-        <option value="inr">INR</option>
-        <option value="twd">TWD</option>
+        <option value="usd">USD - United States Dollar</option>
+        <option value="eur">EUR - Euro</option>
+        <option value="nok">NOK - Norwegian Krone</option>
+        <option value="aud">AUD - Australian Dollar</option>
+        <option value="gbp">GBP - Sterling</option>
+        <option value="cad">CAD - Canadian Dollar</option>
+        <option value="pln">PLN - Polish Zloty</option>
+        <option value="sek">SEK - Swedish Krona</option>
+        <option value="dkk">DKK - Danish Krone</option>
+        <option value="jpy">JPY - Japanese Yen</option>
+        <option value="cny">CNY - Chinese Yuan</option>
+        <option value="chf">CHF - Swiss Franc</option>
+        <option value="hkd">HKD - Hong Kong Dollar</option>
+        <option value="sgd">SGD - Singapore Dollar</option>
+        <option value="krw">KRW - South Korean Won</option>
+        <option value="nzd">NZD - New Zealand Dollar</option>
+        <option value="inr">INR - Indian Rupee</option>
+        <option value="twd">TWD - New Taiwan Dollar</option>
+        <option value="zar">ZAR - South African Rand</option>
+        <option value="brl">BRL - Brazilian Real</option>
+        <option value="thb">THB - Thai Baht</option>
+        <option value="mxn">MXN - Mexican Peso</option>
+        <option value="ils">ILS - Israeli New Shekel</option>
+        <option value="idr">IDR - Indonesian Rupiah</option>
+        <option value="czk">CZK - Czech Koruna</option>
+        <option value="try">TRY - Turkish Lira</option>
+        <option value="huf">HUF - Hungarian Forint</option>
+        <option value="clp">CLP - Chilean Peso</option>
+        <option value="sar">SAR - Saudi Riyal</option>
+        <option value="php">PHP - Philippine Peso</option>
+        <option value="myr">MYR - Malaysian Ringgit</option>
+        <option value="cop">COP - Colombian Peso</option>
+        <option value="rub">RUB - Russian Ruble</option>
+        <option value="ron">RON - Romanian Leu</option>
+        <option value="uah">UAH - Ukrainian Hryvnia</option>
+        <option value="ars">ARS - Argentine Peso</option>
+
 
     `;
 
     // Render main page
+    const mainNode = document.getElementById('main');
     mainNode.innerHTML = `
     <div id="title">
     <h1>Currency Converter</h1>
@@ -69,7 +76,7 @@ const renderHome = () => {
         ${currencyOptions}
         </select>
     </div>
-    <div class="inputField"
+    <div class="inputField">
     <label for="amount">Amount:</label>
     <input type="text" name="amount" id="amount">
     </div>
@@ -85,46 +92,44 @@ const renderHome = () => {
 </div>
     `;
 
+    // Extract Nodes
     const fromCurrencyNode = document.getElementById('fromCurrency');
     const toCurrencyNode = document.getElementById('toCurrency');
     const amountNode = document.getElementById('amount');
+    const buttonNode = document.getElementById('button');
+    const resultNode = document.getElementById('result');
+
+    // Import values
     let selectedFromCurrency;
     let selectedToCurrency;
     let selectedAmount;
-
-
     fromCurrencyNode.addEventListener('input', e => {
         selectedFromCurrency = e.target.value;
     });
-
     toCurrencyNode.addEventListener('input', e => {
         selectedToCurrency = e.target.value;
     });
-
     amountNode.addEventListener('input', e => {
         selectedAmount = e.target.value;
     })
 
-    
-
-   
-
-    const resultField = document.getElementById('result');
-
-    const buttonNode = document.getElementById('button');
-    buttonNode.addEventListener('click', async() => {
+    // Conversion
+    buttonNode.addEventListener('click', async () => {
         if (selectedFromCurrency == selectedToCurrency) {
-            resultField.innerHTML = 'Please select two separate currencies from the list in order to proceed with the conversion';
+            resultNode.innerHTML = 'Not a valid input, please select two distinct currencies';
         } else {
-            let finalAmount = await main(selectedFromCurrency, selectedToCurrency, selectedAmount)
-            console.log(finalAmount)
-            resultField.innerHTML = ` 
-            ${selectedFromCurrency} and ${selectedToCurrency}
-            You converted to ${finalAmount}
-            `;
-        }
+            if (isNaN(parseFloat(selectedAmount))) {
+                resultNode.innerHTML = 'Only numbers are valid input.'
+            } else {
+                let finalAmount = await main(selectedFromCurrency, selectedToCurrency, selectedAmount)
+                finalAmount = parseFloat(finalAmount);
+                finalAmount = finalAmount.toFixed(2);
+                resultNode.innerHTML = ` 
+                ${selectedFromCurrency.toUpperCase()} ${selectedAmount},- is equivalent of ${selectedToCurrency.toUpperCase()} ${finalAmount},-
+                `;
+            }
+        };
     });
-
 };
 
 renderHome();

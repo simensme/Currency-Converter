@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+
+    body {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+
+        #main {
+            background-color: lightblue;
+            display: inline-block;
+
+            #title,
+            form,
+            #buttonField,
+            #resultField {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .inputField {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            label {
+                width: 100px;
+            }
+
+            select {
+                width: 150px;
+            }
+
+            
+        }
+    }
+}
