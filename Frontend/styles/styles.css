@@ -6,11 +6,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 80vh;
+  background-color: rgb(218, 232, 236);
 }
 * body #main {
   background-color: lightblue;
   display: inline-block;
+  padding: 50px;
+  border: solid 3px black;
+}
+* body #main #title h1 {
+  color: #11999E;
+  margin-bottom: 35px;
 }
 * body #main #title,
 * body #main form,
@@ -18,16 +25,30 @@
 * body #main #resultField {
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 * body #main .inputField {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 31px;
 }
 * body #main label {
   width: 100px;
 }
 * body #main select {
   width: 150px;
+}
+* body #main #amount {
+  width: 143.5px;
+}
+* body #main button {
+  position: relative;
+  border: none;
+  border-radius: 6px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  background: #456e36;
+  padding: 15px 20px 15px 20px;
+  font-weight: 600;
 }/*# sourceMappingURL=styles.css.map */
