@@ -41,4 +41,3 @@ app.get(accessLink, async (req, res) => {
         res.send(json);
     }
 });
-

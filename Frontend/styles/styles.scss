@@ -16,7 +16,6 @@
             border: solid 3px black;
 
             #title {
-
                 h1 {
                     color: #11999E;
                     margin-bottom: 35px;
@@ -62,7 +61,10 @@
                 font-weight: 600;
             }
 
-
+            #result {
+                color: black;
+                font-weight: 600;
+            }
         }
     }
 }
